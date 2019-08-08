@@ -2,7 +2,10 @@ package com.re01.myclient.test;
 
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
@@ -37,6 +40,21 @@ public class Test23 {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void b1(){
+        String source="e:/122.txt";
+        String desc="e:/129989.txt";
+        try {
+            FileInputStream fileInputStream=new FileInputStream(source);
+            FileOutputStream fileOutputStream = new FileOutputStream(desc,true);
+            FileChannel channel = fileInputStream.getChannel();
+            FileChannel channel1 = fileOutputStream.getChannel();
+            channel.transferTo(0,channel.size(),channel1);
+        } catch (IOException  e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void c(){
@@ -93,6 +111,6 @@ public class Test23 {
 
     public static void main(String[] args) {
         Test23 t=new Test23();
-        t.d();
+        t.b1();
     }
 }
